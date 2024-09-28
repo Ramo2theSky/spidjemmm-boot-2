@@ -1,0 +1,32 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+namespace Trash {
+	public class #SCRIPTNAME# : MonoBehaviour {
+		#NOTRIM#
+
+#if UNITY_EDITOR
+		private void OnValidate() {
+			#NOTRIM#
+		}
+#endif
+
+		private void Awake() {
+			#NOTRIM#
+		}
+
+		private void OnEnable() {
+			#NOTRIM#
+		}
+
+		private void OnDisable() {
+			#NOTRIM#
+		}
+
+		private void OnDestroy() {
+			#NOTRIM#
+		}
+		#NOTRIM#
+	}
+}
