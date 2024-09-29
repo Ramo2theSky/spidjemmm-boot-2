@@ -9,8 +9,8 @@ namespace Trash {
         [SerializeField] private Rigidbody2D body;
 
         public void OnPick(Transform holdPoint) {
-            body.position = holdPoint.position;
-            body.transform.parent = holdPoint;
+            transform.parent = holdPoint;
+            transform.localPosition = Vector3.zero;
             body.bodyType = RigidbodyType2D.Kinematic;
         }
 
@@ -19,11 +19,6 @@ namespace Trash {
             body.bodyType = RigidbodyType2D.Dynamic;
             body.velocity = velocity;
         }
-
-        private void OnTriggerEnter2D(Collider2D other) {
-            Debug.Log("Hello");    
-        }
-
     }
 
 }
