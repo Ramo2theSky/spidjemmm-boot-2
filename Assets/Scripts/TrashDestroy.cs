@@ -7,7 +7,7 @@ namespace Trash {
 
         private void OnTriggerEnter2D(Collider2D other) {
             trashCan.OnInsert();
-            Destroy(other.gameObject);
+            Destroy(other.transform.root.gameObject);
         }
     }
 

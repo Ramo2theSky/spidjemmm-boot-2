@@ -16,9 +16,17 @@ namespace Trash {
         public float downGravityModifier = 1;
 
         private float moveDirection;
+        private float faceDirection = 1;
         private bool jumpPressed;
         private bool jumpCanceled;
         private bool downPressed;
+
+        public Transform holdPoint;
+        public SpriteRenderer handSprite;
+        public Vector2 throwVelocity = new Vector2(5, 2);
+        public float throwBodyVelocityFactor = 0.2f;
+        private IPickable currentPickableItem;
+        private IPickable currentHeldItem;
 
         private InputAction jumpAction;
         private InputAction moveAction;
@@ -78,6 +86,7 @@ namespace Trash {
 
         private void OnMove_Performed(InputAction.CallbackContext ctx) {
             moveDirection = ctx.ReadValue<float>();
+            faceDirection = moveDirection;
         }
         private void OnMove_Canceled(InputAction.CallbackContext obj) {
             moveDirection = 0;
@@ -91,7 +100,30 @@ namespace Trash {
         }
 
         private void OnThrow_Performed(InputAction.CallbackContext ctx) {
-            throw new NotImplementedException();
+
+            if (currentHeldItem != null) {
+                currentHeldItem.OnThrow(CalculateThrowVelocity());
+                handSprite.enabled = false;
+                currentHeldItem = null;
+                return;
+            }
+
+            if (currentPickableItem != null) {
+                currentHeldItem = currentPickableItem;
+                currentHeldItem.OnPick(holdPoint);
+                handSprite.enabled = true;
+            }
+
+            Vector2 CalculateThrowVelocity() {
+                var vel = throwVelocity;
+                vel.x *= faceDirection;
+                if (downPressed) {
+                    vel.x = 0;
+                } else {
+                    vel += throwBodyVelocityFactor * body.velocity;
+                }
+                return vel; 
+            }
         }
 
         private void OnDown_Started(InputAction.CallbackContext ctx) {
@@ -103,6 +135,17 @@ namespace Trash {
             downPressed = false;
             body.gravityScale -= downGravityModifier;
         }
+
+        private void OnTriggerEnter2D(Collider2D collision) {
+            collision.TryGetComponent(out currentPickableItem);
+        }
+
+        private void OnTriggerExit2D(Collider2D collision) {
+            if (!collision.TryGetComponent<IPickable>(out var pickable)) { return; }
+            if (pickable != currentPickableItem) { return; }
+            currentPickableItem = null;
+        }
+
     }
 
 
