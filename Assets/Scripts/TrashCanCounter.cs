@@ -12,7 +12,7 @@ namespace Trash {
         }
 
         private void OnFillCountChanged(int count, int capacity) {
-            text.SetText($"{count}/{capacity}");
+            text.SetText(count == capacity ? "FULL" : $"{count}/{capacity}");
         }
     }
 

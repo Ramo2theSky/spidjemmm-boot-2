@@ -119,6 +119,7 @@ namespace Trash {
                 vel.x *= faceDirection;
                 if (downPressed) {
                     vel.x = 0;
+                    vel.y = -vel.y;
                 } else {
                     vel += throwBodyVelocityFactor * body.velocity;
                 }

@@ -15,6 +15,10 @@ namespace Trash {
             
         }
 
+        public void ResetTimer() {
+            elapsed = 0;
+        }
+
 
 
     }
