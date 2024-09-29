@@ -41,7 +41,7 @@ Shader "Trash/Blur" {
             FragmentInput VertexStage (VertexInput v) {
                 FragmentInput f;
                 f.vertex = UnityObjectToClipPos(v.vertex);
-                f.uv = 0.5 * (f.vertex.xy + 1);
+                f.uv = 0.5 * (float2(f.vertex.x, -f.vertex.y) + 1);
                 f.color = v.color * _Tint;
                 f.offset = _Blur * _CameraSortingLayerTexture_TexelSize.xy;   // Offset in pixels.
                 return f;

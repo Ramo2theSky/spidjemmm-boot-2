@@ -8,6 +8,7 @@ namespace Trash {
         private void OnTriggerEnter2D(Collider2D other) {
             trashCan.OnInsert();
             Destroy(other.transform.root.gameObject);
+            LevelProgressTracker.Instance.OnTrashDumped();
         }
     }
 
