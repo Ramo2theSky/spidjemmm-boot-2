@@ -11,11 +11,14 @@ namespace Trash {
         [SerializeField] private int trashCollected = 0;
 
         [SerializeField] private TMP_Text text;
+        [SerializeField] private GameState resultState;
 
         public static LevelProgressTracker Instance { get; private set; }
 
         private void Awake() {
             Instance = this;
+            totalTrash = FindObjectsByType<TrashObject>(FindObjectsSortMode.None).Length;
+            text.SetText($"{trashCollected}/{totalTrash}");
         }
 
         public void OnTrashDumped() {
@@ -32,12 +35,12 @@ namespace Trash {
         }
 
         private IEnumerator WinCoroutine() {
-            yield return new WaitForSeconds(0.5f);
-            OpenLeaderBoard(timer);
+            yield return new WaitForSeconds(1f);
+            OpenLeaderBoard();
         }
 
-        private void OpenLeaderBoard(GameTimer timer) {
-            //throw new NotImplementedException();
+        private void OpenLeaderBoard() {
+            SceneSelector.Instance.ChangeState(resultState);
         }
     }
 

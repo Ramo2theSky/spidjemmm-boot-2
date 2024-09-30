@@ -4,67 +4,25 @@ using System.Collections.Generic;
 using UnityEngine;
 
 namespace Trash {
-	public class SceneSelector : MonoBehaviour {
+    public class SceneSelector : MonoBehaviour {
 
 		[SerializeField] private GameState currentState;
 
-        public SceneSelector Instance { get; private set; }
+        public static SceneSelector Instance { get; private set; }
 
         private void Awake() {
             Instance = this;
         }
 
+        private void Start() {
+            currentState.gameObject.SetActive(true);
+        }
+
         public void ChangeState(GameState newState) {
-            currentState.OnStateExit();
+            currentState.gameObject.SetActive(false);
 			currentState = newState;
-            currentState.OnStateEnter();
+            currentState.gameObject.SetActive(true);
         }
     }
-
-    public abstract class GameState : MonoBehaviour {
-
-        public abstract void OnStateEnter();
-        public abstract void OnStateExit();
-    }
-
-    public class GameState_StartMenu : GameState {
-
-        [SerializeField] private GameObject startMenuCanvas;
-
-        public override void OnStateEnter() {
-            throw new NotImplementedException();
-        }
-
-        public override void OnStateExit() {
-            throw new NotImplementedException();
-        }
-    }
-
-    public class GameState_Gameplay : GameState {
-
-        [SerializeField] private GameObject startMenuCanvas;
-
-        public override void OnStateEnter() {
-            throw new NotImplementedException();
-        }
-
-        public override void OnStateExit() {
-            throw new NotImplementedException();
-        }
-    }
-
-    public class GameState_Result : GameState {
-
-        [SerializeField] private GameObject startMenuCanvas;
-
-        public override void OnStateEnter() {
-            throw new NotImplementedException();
-        }
-
-        public override void OnStateExit() {
-            throw new NotImplementedException();
-        }
-    }
-
 
 }

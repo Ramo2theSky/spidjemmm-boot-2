@@ -2,6 +2,8 @@ using System.IO;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static Trash.JSONTest;
+using static UnityEngine.EventSystems.EventTrigger;
 
 namespace Trash {
     public class LeaderBoard : MonoBehaviour {
@@ -11,18 +13,15 @@ namespace Trash {
 
 		private string SavePath => Path.Combine(Application.persistentDataPath, "leaderboard.sav");
 
-		public bool TryInsertEntry(LeaderBoardEntry entry) {
-			for (int i = entries.Count - 1; i >= 0; i--) {
-				if (entry.CompareTo(entries[i]) < 0) {
-					entries.Insert(i, entry);
-					return true;
-				}
-			}
-			return false;
+        public bool TryInsertEntry(LeaderBoardEntry entry) {
+			entries.Add(entry);
+			SortEntry();
+			Debug.Log(entries.Count);
+			return true;
 		}
 
 		[ContextMenu("Update Display")]
-		private void UpdateDisplay() {
+		public void UpdateDisplay() {
 			int i = 0;
 			for (; i < Mathf.Min(entries.Count, displays.Length); i++) {
 				displays[i].SetDisplay(i + 1, entries[i]);
@@ -34,16 +33,15 @@ namespace Trash {
 
 		[ContextMenu("Sort Entry")]
 		private void SortEntry() {
-			entries.Sort();
-		}
-
-		public void SaveLeaderBoard() {
-			File.WriteAllText(SavePath, JsonUtility.ToJson(entries));
+            entries.Sort();
+        }
+        public void SaveLeaderBoard() {
+			File.WriteAllText(SavePath, JsonUtility.ToJson(new LeaderBoardEntries { entry = entries }));
 		}
 
         public void LoadLeaderBoard() {
 			if (!File.Exists(SavePath)) { return; }
-			entries = JsonUtility.FromJson<List<LeaderBoardEntry>>(File.ReadAllText(SavePath));
+			entries = JsonUtility.FromJson<LeaderBoardEntries>(File.ReadAllText(SavePath)).entry;
         }
 
     }
