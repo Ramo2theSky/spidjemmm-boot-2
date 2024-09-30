@@ -6,10 +6,10 @@ namespace Trash {
         [SerializeField] private TrashCan trashCan;
 
         private void OnTriggerEnter2D(Collider2D other) {
-            trashCan.OnInsert();
-            Destroy(other.transform.root.gameObject);
-            LevelProgressTracker.Instance.OnTrashDumped();
+                trashCan.OnInsert();
+                Destroy(other.transform.root.gameObject);
+                LevelProgressTracker.Instance.OnTrashDumped();
+            }
         }
-    }
 
 }
