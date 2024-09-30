@@ -10,17 +10,20 @@ namespace Trash {
         [SerializeField] private int totalTrash = 6;
         [SerializeField] private int trashCollected = 0;
 
-        [SerializeField] private TMP_Text text;
+        [SerializeField] private TMP_Text trashCountText;
+
+        [SerializeField] private GameState resultState;
 
         public static LevelProgressTracker Instance { get; private set; }
 
         private void Awake() {
             Instance = this;
+            trashCountText.SetText($"{trashCollected}/{totalTrash}");
         }
 
         public void OnTrashDumped() {
             trashCollected++;
-            text.SetText(trashCollected == totalTrash ? "DONE" : $"{trashCollected}/{totalTrash}");
+            trashCountText.SetText(trashCollected == totalTrash ? "DONE" : $"{trashCollected}/{totalTrash}");
             if (trashCollected == totalTrash) {
                 OnWin();
             }
@@ -33,12 +36,19 @@ namespace Trash {
 
         private IEnumerator WinCoroutine() {
             yield return new WaitForSeconds(0.5f);
-            OpenLeaderBoard(timer);
+            OpenLeaderBoard();
         }
 
-        private void OpenLeaderBoard(GameTimer timer) {
-            //throw new NotImplementedException();
+        private void OpenLeaderBoard() {
+            SceneSelector.Instance.ChangeState(resultState);
         }
+
+        [ContextMenu("FORCE WIN")]
+        private void ForceWin() {
+            OpenLeaderBoard();
+        }
+
+
     }
 
 }

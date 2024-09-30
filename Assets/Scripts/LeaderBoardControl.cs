@@ -23,7 +23,7 @@ namespace Trash {
         }
 
         private IEnumerator Wait() {
-            yield return new WaitForSeconds(0.5f);
+            yield return new WaitForSeconds(1.0f);
             anyKey.Enable();
             anyKey.performed += Click;
         }
