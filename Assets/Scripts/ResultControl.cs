@@ -41,8 +41,11 @@ namespace Trash {
         }
 
         private void DoneNameInput() {
-            leaderBoard.TryInsertEntry(new LeaderBoardEntry { Name = playerName, Time = gameTimer.Elapsed });
+            var result = leaderBoard.TryInsertEntry(new LeaderBoardEntry { Name = playerName, Time = gameTimer.Elapsed });
+            Debug.Log(result);
+            leaderBoard.UpdateDisplay();
             SceneSelector.Instance.ChangeState(leaderBoardState);
+            
         }
 
 
