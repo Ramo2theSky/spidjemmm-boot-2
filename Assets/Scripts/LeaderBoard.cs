@@ -11,7 +11,7 @@ namespace Trash {
 
 		private string SavePath => Path.Combine(Application.persistentDataPath, "leaderboard.sav");
 
-		public bool TryInsertEntry(LeaderBoardEntry entry) {
+        public bool TryInsertEntry(LeaderBoardEntry entry) {
 			for (int i = entries.Count - 1; i >= 0; i--) {
 				if (entry.CompareTo(entries[i]) < 0) {
 					entries.Insert(i, entry);
