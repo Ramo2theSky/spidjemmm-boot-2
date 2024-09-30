@@ -9,6 +9,8 @@ namespace Trash {
         [SerializeField] TMP_Text text;
 		[SerializeField] private float elapsed;
 
+        public float Elapsed => elapsed;
+
         private void Update() {
             elapsed += Time.deltaTime;
             text.SetText(string.Format("{0:0.00}", elapsed));
