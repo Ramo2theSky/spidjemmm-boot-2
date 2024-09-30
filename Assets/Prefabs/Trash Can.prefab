@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 28643633524261444}
   - component: {fileID: 4575246089460734576}
   - component: {fileID: 5521168062645277356}
+  - component: {fileID: 6631819880669791820}
   - component: {fileID: 8417572177058427771}
   - component: {fileID: 5324682008698013937}
   m_Layer: 6
@@ -152,14 +153,63 @@ EdgeCollider2D:
   m_Offset: {x: 0, y: 0}
   m_EdgeRadius: 0
   m_Points:
-  - {x: -0.45, y: 0.5}
-  - {x: -0.33, y: -0.5}
-  - {x: 0.33, y: -0.5}
-  - {x: 0.45, y: 0.5}
+  - {x: -0.45, y: 1}
+  - {x: -0.33, y: 0}
+  - {x: 0.33, y: 0}
+  - {x: 0.45, y: 1}
   m_AdjacentStartPoint: {x: 0, y: 0}
   m_AdjacentEndPoint: {x: 0, y: 0}
   m_UseAdjacentStartPoint: 0
   m_UseAdjacentEndPoint: 0
+--- !u!60 &6631819880669791820
+PolygonCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1363031234647818220}
+  m_Enabled: 0
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0}
+    oldSize: {x: 0.86, y: 1.03}
+    newSize: {x: 0.86, y: 1.03}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: -0.45, y: 1}
+      - {x: -0.33, y: 0}
+      - {x: 0.33, y: 0}
+      - {x: 0.45, y: 1}
+  m_UseDelaunayMesh: 0
 --- !u!114 &8417572177058427771
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -174,6 +224,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxCapacity: 5
   currentFilled: 0
+  spriteRenderer: {fileID: 28643633524261444}
+  emptySprite: {fileID: 21300000, guid: b81e9fb597a0e014fbbb335b28f79680, type: 3}
+  fullSprite: {fileID: 21300000, guid: e44ac1523a9b0c2439f32d908e3d8852, type: 3}
+  fillableCollider: {fileID: 5521168062645277356}
+  fullCollider: {fileID: 6631819880669791820}
 --- !u!114 &5324682008698013937
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -215,7 +270,7 @@ Transform:
   m_GameObject: {fileID: 1861114253288995617}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.2, z: 0}
+  m_LocalPosition: {x: 0, y: 0.4, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -255,7 +310,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.2
+  m_Radius: 0.25
 --- !u!114 &6366933004774096816
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -303,7 +358,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -1}
+  m_AnchoredPosition: {x: 0, y: -0.5}
   m_SizeDelta: {x: 1, y: 0.5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!23 &4872226438116321543
@@ -326,7 +381,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  - {fileID: -9143933618149052311, guid: 46c68b22339e4b2439a8909e0f39d74d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -370,15 +425,15 @@ MonoBehaviour:
       m_Calls: []
   m_text: 0/5
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 46c68b22339e4b2439a8909e0f39d74d, type: 2}
+  m_sharedMaterial: {fileID: -9143933618149052311, guid: 46c68b22339e4b2439a8909e0f39d74d, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4278190080
-  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
