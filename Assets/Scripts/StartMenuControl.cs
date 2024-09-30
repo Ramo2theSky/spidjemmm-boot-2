@@ -11,6 +11,10 @@ namespace Trash {
         [SerializeField] private InputAction anyKey;
         [SerializeField] private GameState gameplayState;
 
+        [SerializeField] AudioSource backgroundAudio;
+        [SerializeField] AudioClip changeMusic;
+
+
         private void OnEnable() {
             anyKey.Enable();
             anyKey.performed += Click;
@@ -22,6 +26,9 @@ namespace Trash {
 
         private void Click(InputAction.CallbackContext obj) {
             SceneSelector.Instance.ChangeState(gameplayState);
+
+            backgroundAudio.clip = changeMusic;
+            backgroundAudio.Play();
         }
     }
 

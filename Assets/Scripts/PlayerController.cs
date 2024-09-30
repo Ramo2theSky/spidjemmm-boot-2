@@ -33,6 +33,9 @@ namespace Trash {
         private InputAction downAction;
         private InputAction throwAction;
 
+        public AudioSource PlayerSound;
+        public AudioClip jumpSound, throwSound;
+
         private void Awake() {
             asset.Enable();
             var map = asset.FindActionMap("Player");
@@ -62,6 +65,10 @@ namespace Trash {
 
             if (jumpPressed) {
                 bodyVelocity.y = jumpVelocity;
+
+                PlayerSound.clip = jumpSound;
+                PlayerSound.Play();
+
                 jumpPressed = false;
             }
 
@@ -103,6 +110,10 @@ namespace Trash {
 
             if (currentHeldItem != null) {
                 currentHeldItem.OnThrow(CalculateThrowVelocity());
+
+                PlayerSound.clip = throwSound;
+                PlayerSound.Play();
+
                 handSprite.enabled = false;
                 currentHeldItem = null;
                 return;

@@ -14,6 +14,10 @@ namespace Trash {
         [SerializeField] private Collider2D fillableCollider;
         [SerializeField] private Collider2D fullCollider;
 
+        [SerializeField] AudioSource trashCanSound;
+        [SerializeField] AudioClip hitSound;
+
+
         public event Action<int, int> OnFillCountChanged = delegate { };
 
         public void OnInsert() {
@@ -35,6 +39,12 @@ namespace Trash {
             fillableCollider.enabled = true;
             fullCollider.enabled = false;
             spriteRenderer.sprite = emptySprite;
+        }
+
+        private void OnCollisionEnter2D(Collision2D collision)
+        {
+            trashCanSound.clip = hitSound;
+            trashCanSound.Play();
         }
 
     }
